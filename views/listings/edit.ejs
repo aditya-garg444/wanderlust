@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplateOthers") -%>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3 class="mb-3">Edit the listing</h3>
+            <form action="/listings/<%=listing._id%>?_method=PATCH" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" id="title" class="form-control" placeholder="Add a catchy title" required value="<%=listing.title%>">
+                    <div class="invalid-feedback">Please provide a title</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" class="form-control" required><%=listing.description%></textarea>
+                    <div class="invalid-feedback">Please write something about the place</div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-4">
+                        <label for="description" class="form-label">Original Image</label><br>
+                        <img src="<%= imageUrl %>" alt="listingimage" style="width: 250px; height: 150px;">
+                    </div>
+                    <div class="mb-3 col-8">
+                        <label for="image" class="form-label">Upload new image</label>
+                        <input type="file" name="listing[image]" id="image" class="form-control" value="<%=listing.image.filename%>">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select" aria-label="Default select example" required name="listing[category]">
+                        <option value="" disabled>Select a category</option>
+                        <% for(category of categories) { %>
+                            <option value="<%= category %>" <%= listing.category === category ? "selected" : "" %>><%= category %></option>
+                        <%}%>
+                    </select>
+                    <div class="invalid-feedback">Please select a category from above</div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input required type="number" name="listing[price]" id="price" class="form-control" placeholder="1,200" value="<%=listing.price%>">
+                        <div class="invalid-feedback">Please enter valid price</div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select" aria-label="Default select example" required name="listing[country]">
+                            <option value="" disabled>Select a country</option>
+                            <% for(country of countries) { %>
+                                <option value="<%= country %>" <%= listing.country === country ? "selected" : "" %>><%= country %></option>
+                            <%}%>
+                        </select>
+                        <div class="invalid-feedback">Please select the country</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input required type="text" name="listing[location]" id="location" class="form-control" placeholder="Enter location" value="<%=listing.location%>">
+                    <div class="invalid-feedback">Location is required</div>
+                </div>
+                <br>
+                <button class="btn form-btn">Update</button>
+            </form>
+        </div>
+    </div>

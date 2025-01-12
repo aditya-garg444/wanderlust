@@ -1,0 +1,66 @@
+<% layout("layouts/boilerplateOthers") -%>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3 class="mb-3">Create a New Listing</h3>
+            <form action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Add a catchy title</label>
+                    <input type="text" placeholder="Enter title" name="listing[title]" id="title" class="form-control" required>
+                    <div class="invalid-feedback">Please provide a title</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" placeholder="Describe the place" class="form-control" id="description" required></textarea>
+                    <div class="invalid-feedback">Please write something about the place</div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="image" class="form-label">Upload listing image</label>
+                        <input type="file" name="listing[image]" class="form-control" id="image">
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" aria-label="Default select example" required name="listing[category]">
+                            <option value="" disabled selected>Select a category</option>
+                            <% for(category of categories) { %>
+                                <option value="<%= category %>"><%= category %></option>
+                            <%}%>
+                        </select>
+                        <div class="invalid-feedback">Please select a category from above</div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" placeholder="1,200" name="listing[price]" class="form-control" id="price" required>
+                        <div class="invalid-feedback">Please enter valid price</div>
+                        
+                    </div>
+                    
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select" aria-label="Default select example" required name="listing[country]">
+                            <option value="" disabled selected>Select a country</option>
+                            <% for(country of countries) { %>
+                                <option value="<%= country %>"><%= country %></option>
+                            <%}%>
+                        </select>
+                        <div class="invalid-feedback">Please select the country</div>
+                    </div>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" placeholder="Enter location" name="listing[location]" class="form-control" id="location" required>
+                    <div class="invalid-feedback">Please provide a location</div>
+                </div>
+                
+                <br>
+                <button class="btn form-btn">Add</button>
+            </form>
+        </div>
+    </div>
+    
